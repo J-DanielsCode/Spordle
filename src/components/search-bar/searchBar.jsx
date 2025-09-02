@@ -51,7 +51,7 @@ const SearchBar = () => {
 
     return (
         <div className="h-32 flex flex-col items-center bg-gray-950 p-4">
-            <h1 className="text-white w-full px-5 mb-1" >Guess {guessNum} of 10</h1>
+            <h1 className="text-white w-full px-5 mb-1 max-w-2xl" >Guess {guessNum} of 10</h1>
             <form
                 onSubmit={(e) => e.preventDefault()}
                 className="mb-8 w-full max-w-2xl "
