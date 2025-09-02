@@ -1,16 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { Search, Mic } from 'lucide-react'
+import { sampleData } from "../../test-data/sample-data.js"
 
-const sampleData = [
-    {
-        name: "Nikola Jokic",
-        height: "2.11m",
-        weight: "129kg",
-        nationality: "Serbian",
-        allNbaSelections: "7",
-        experience: "9",
-    }
-]
  
 const SearchBar = () => {
     // Todo for you: Add the below code to the GoogleSearchBar component:
