@@ -3,11 +3,11 @@ import { Search, Mic } from 'lucide-react'
 import { sampleData } from "../../test-data/sample-data.js"
 
  
-const SearchBar = () => {
+const SearchBar = ({ guessNum, setGuessNum }) => {
     // Todo for you: Add the below code to the GoogleSearchBar component:
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    const [guessNum, setGuessNum] = useState(1);
+    // const [guessNum, setGuessNum] = useState(1);
     
     const debounce = (func, delay) => {
         let timeoutId;
@@ -26,6 +26,7 @@ const SearchBar = () => {
                     item.name.toLowerCase().includes(term.toLowerCase())
                 );
                 setSearchResults(results);
+                setGuessNum((prev) => prev + 1);
             }
         }, 300),
         [],
