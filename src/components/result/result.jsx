@@ -9,7 +9,7 @@ import jokicPic from "../../assets/jokic.jpeg";
 
 
 
-const ResultComponent = () => {
+const ResultComponent = ({ guessNum }) => {
     const [draftStatus, setDraftStatus] = useState("");
     useEffect(() => {
         const draftGuessResult = (guess, target) => {
@@ -30,10 +30,13 @@ const ResultComponent = () => {
         draftGuessResult(sampleData[0].draftYear, targetData[0].draftYear);
     }, []);
 
+    
+
 
 
 
     return (
+        
         <div className="result-container">
             <div id="player-profile">
                 <img id="player-pic" src={jokicPic} alt="Nikola Jokic" ></img>
@@ -59,7 +62,7 @@ const ResultComponent = () => {
                     <h1 className="cell-data">{sampleData[0].nationality}</h1>
                 </div>
                 <div id="all-nba" className="result-item">
-                    <h1 className="cell-title">All NBA Selections</h1>
+                    <h1 className="cell-title">All NBA</h1>
                     <h1 className="cell-data">{sampleData[0].allNbaSelections}</h1>
                 </div>
                 <div id="experience" className="result-item">
@@ -68,7 +71,9 @@ const ResultComponent = () => {
                 </div>
             </div>
             <div id="colour-key">
-                <p>Status: {draftStatus}</p>
+                <p id="no-match" className="example">No Match</p>
+                <p id="close" className="example">Close</p>
+                <p id="match" className="example">Match</p>
             </div>
         </div>
     )

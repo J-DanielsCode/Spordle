@@ -1,5 +1,5 @@
 .result-container {
-    background-color: #060913;
+    background-color: #030712;
     width: 100%;
     max-width: 512px;
     color: white;
@@ -51,6 +51,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                font-size: 14px;
             }
 
             .cell-data {
@@ -60,6 +61,31 @@
                 text-align: center;
                 font-size: 20px;
             }
+        }
+    }
+    #colour-key {
+        display: flex;
+        justify-content: center;
+
+        .example {
+            width: 100px;
+            height: 50px;
+            background-color: #4D5467;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 5px;
+        }
+
+        #match {
+            background-color: green;
+        }
+
+        #close {
+            background-color: yellow;
+            color: black;
         }
     }
 
