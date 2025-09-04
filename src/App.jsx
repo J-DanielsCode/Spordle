@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <NavBar guessNum={guessNum} setGuessNum={setGuessNum} />
-      <SearchBar guessNum={guessNum} />
+      <SearchBar guessNum={guessNum} setGuessNum={setGuessNum} />
       {/* Only show ResultComponent when guessNum === 2 */}
       {guessNum === 2 && <ResultComponent guessNum={guessNum} />}
     </div>

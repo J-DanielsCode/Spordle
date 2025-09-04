@@ -26,8 +26,9 @@ const SearchBar = ({ guessNum, setGuessNum }) => {
                     item.name.toLowerCase().includes(term.toLowerCase())
                 );
                 setSearchResults(results);
-                setGuessNum((prev) => prev + 1);
             }
+            setGuessNum((prev) => prev + 1);
+            console.log(guessNum);
         }, 300),
         [],
     )
@@ -75,8 +76,8 @@ const SearchBar = ({ guessNum, setGuessNum }) => {
                 </div>{' '}
             </form>{' '}
             {searchResults.length > 0 && (
-                <div className="w-full max-w-2xl rounded-lg bg-white p-4 shadow-md">
-                    <h2 className="mb-4 text-xl font-bold"> Search Results: </h2>{' '}
+                <div className="w-full max-w-lg rounded-lg bg-white p-2 shadow-md">
+                    {/* <h2 className="mb-4 text-xl font-bold"> Search Results: </h2>{' '} */}
                     <ul>
                         {' '}
                         {searchResults.map((result) => (
