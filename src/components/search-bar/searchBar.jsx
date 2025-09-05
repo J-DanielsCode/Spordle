@@ -7,6 +7,7 @@ const SearchBar = ({ guessNum, setGuessNum }) => {
     // Todo for you: Add the below code to the GoogleSearchBar component:
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const [searchSuggestions, setSearchSuggestions] = useState([]);
     // const [guessNum, setGuessNum] = useState(1);
     
     const debounce = (func, delay) => {
@@ -17,36 +18,51 @@ const SearchBar = ({ guessNum, setGuessNum }) => {
         }
     }
 
-    const handleSearch = useCallback(
+    const handleSuggestion = useCallback(
         debounce((term) => {
             if (term.trim() === '') {
-                setSearchResults([]);
+                setSearchSuggestions([]);
             } else {
                 const results = sampleData.filter((item) =>
                     item.name.toLowerCase().includes(term.toLowerCase())
                 );
-                setSearchResults(results);
+                setSearchSuggestions(results);
             }
-            setGuessNum((prev) => prev + 1);
-            console.log(guessNum);
         }, 300),
         [],
     )
 
+
+
     
-    useEffect(() => {
-        handleSearch(searchTerm);
-    }, [searchTerm, handleSearch]);
+    // useEffect(() => {
+    //     handleSearch(searchTerm);
+    // }, [searchTerm, handleSearch]);
     
     const handleInputChange = (e) => {
         setSearchTerm(e.target.value);
+        handleSuggestion(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        if(searchTerm.trim() !== '') {
+            const results = sampleData.filter((item) => 
+                item.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setSearchResults(results);       // run search only when Enter pressed
+            setGuessNum((prev) => prev + 1); // increment guessNum only here
+            setSearchSuggestions([]);
+            console.log("Committed search:", searchTerm);      
+        }
     };
 
     return (
         <div className="h-32 flex flex-col items-center bg-gray-950 p-4">
             <h1 className="text-white w-full px-5 mb-1 max-w-lg" >Guess {guessNum} of 10</h1>
             <form
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={handleSubmit}
                 className="mb-8 w-full max-w-lg"
             >
                 <div className="relative">
@@ -75,10 +91,51 @@ const SearchBar = ({ guessNum, setGuessNum }) => {
                     </div>{' '}
                 </div>{' '}
             </form>{' '}
-            {searchResults.length > 0 && (
+            {searchSuggestions.length > 0 && (
+                <div className="w-full max-w-lg rounded-lg bg-white p-2 shadow-md mb-4">
+                    <h2 className="text-sm font-bold mb-2">Suggestions:</h2>
+                    <ul>
+                        {searchSuggestions.map((s) => (
+                        <li key={s.height} className="text-gray-700">
+                            {/* {s.name} */}
+                            <a
+                                href={s.url}
+                                className="text-blue-600 hover:underline"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {s.name}
+                            </a>
+                        </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+            {/* {searchResults.length > 0 && (
+                <div className="w-full max-w-lg rounded-lg bg-white p-2 shadow-md">
+                    <h2 className="text-sm font-bold mb-2">Results:</h2>
+                    <ul>
+                        {searchResults.map((r) => (
+                            <li key={r.height} className="mb-2">
+                                <a
+                                    href={r.url}
+                                    className="text-blue-600 hover:underline"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                {r.name}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )} */}
+
+
+            {/* {searchResults.length > 0 && (
                 <div className="w-full max-w-lg rounded-lg bg-white p-2 shadow-md">
                     {/* <h2 className="mb-4 text-xl font-bold"> Search Results: </h2>{' '} */}
-                    <ul>
+                    {/* <ul>
                         {' '}
                         {searchResults.map((result) => (
                             <li key={result.height} className="mb-2">
@@ -95,7 +152,7 @@ const SearchBar = ({ guessNum, setGuessNum }) => {
                         ))}{' '}
                     </ul>{' '}
                 </div>
-            )}{' '}
+            )}{' '} */} 
         </div>
     )
 }
