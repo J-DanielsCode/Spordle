@@ -53,10 +53,15 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
             const results = sampleData.filter((item) => 
                 item.name.toLowerCase().includes(searchTerm.toLowerCase())
             );
-            setSearchResults(results);       // run search only when Enter pressed
-            setGuessNum((prev) => prev + 1); // increment guessNum only here
-            setSearchSuggestions([]);
-            console.log("Committed search:", searchTerm);      
+
+            if (results.length > 0) {
+                setSearchResults((prev) => [results[0], ...prev]);      // run search only when Enter pressed
+                setGuessNum((prev) => prev + 1); // increment guessNum only here
+                setSearchSuggestions([]);
+                setSearchTerm('');
+                console.log("Committed search:", searchTerm); 
+            }
+     
         }
         
     };
@@ -108,7 +113,7 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
                                 rel="noopener noreferrer"
                                 onClick={(e) => {
                                     e.preventDefault();          // prevent default link navigation
-                                    setSearchResults([s]);       // set searchResults to clicked suggestion
+                                    setSearchResults((prev) => [s, ...prev]);       // puts search result to beggining of arr
                                     setSearchTerm(s.name);       // optional: update input field
                                     setSearchSuggestions([]);    // hide suggestions
                                     setGuessNum((prev) => prev + 1); // increment guessNum
