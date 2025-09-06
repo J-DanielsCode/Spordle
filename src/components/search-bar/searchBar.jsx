@@ -3,10 +3,10 @@ import { Search, Mic } from 'lucide-react'
 import { sampleData } from "../../test-data/sample-data.js"
 
  
-const SearchBar = ({ guessNum, setGuessNum }) => {
+const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
     // Todo for you: Add the below code to the GoogleSearchBar component:
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+    // const [searchResults, setSearchResults] = useState([]);
     const [searchSuggestions, setSearchSuggestions] = useState([]);
     // const [guessNum, setGuessNum] = useState(1);
     
@@ -34,6 +34,8 @@ const SearchBar = ({ guessNum, setGuessNum }) => {
 
 
 
+
+
     
     // useEffect(() => {
     //     handleSearch(searchTerm);
@@ -45,7 +47,7 @@ const SearchBar = ({ guessNum, setGuessNum }) => {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         if(searchTerm.trim() !== '') {
             const results = sampleData.filter((item) => 
@@ -56,6 +58,7 @@ const SearchBar = ({ guessNum, setGuessNum }) => {
             setSearchSuggestions([]);
             console.log("Committed search:", searchTerm);      
         }
+        
     };
 
     return (
@@ -103,6 +106,13 @@ const SearchBar = ({ guessNum, setGuessNum }) => {
                                 className="text-blue-600 hover:underline"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={(e) => {
+                                    e.preventDefault();          // prevent default link navigation
+                                    setSearchResults([s]);       // set searchResults to clicked suggestion
+                                    setSearchTerm(s.name);       // optional: update input field
+                                    setSearchSuggestions([]);    // hide suggestions
+                                    setGuessNum((prev) => prev + 1); // increment guessNum
+                                }}
                             >
                                 {s.name}
                             </a>
