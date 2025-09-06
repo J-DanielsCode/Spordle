@@ -51,43 +51,51 @@ const ResultComponent = ({ guessNum, searchResults }) => {
     return (
         
         <div className="result-container z-40">
-            <div id="player-profile">
-                <img id="player-pic" src={jokicPic} alt="Nikola Jokic" ></img>
-                <h1 id="player-name">{result.name}</h1>
-            </div>
-            <div id="result-grid" >
+            {searchResults.map((guessResult, index) => (
+                <div key={index} className="mb-6">
+                    <div id="player-profile">
+                        <img 
+                            id="player-pic" 
+                            src={jokicPic} 
+                            alt="{guessResult.name}" 
+                        />
+                        <h1 id="player-name">{guessResult.name}</h1>
+                    </div>
+                    <div id="result-grid" >
 
-                
-                <div id="draft" className="result-item">
-                    <h1 className="cell-title">Draft</h1>
-                    <h1 className="cell-data">{result.draftYear}</h1>
+                        
+                        <div id="draft" className="result-item">
+                            <h1 className="cell-title">Draft</h1>
+                            <h1 className="cell-data">{guessResult.draftYear}</h1>
+                        </div>
+                        <div id="height" className="result-item">
+                            <h1 className="cell-title">Height</h1>
+                            <h1 className="cell-data">{guessResult.height}</h1>
+                        </div>
+                        <div id="weight" className="result-item">
+                            <h1 className="cell-title">Weight</h1>
+                            <h1 className="cell-data">{guessResult.weight}</h1>
+                        </div>
+                        <div id="nationality" className="result-item">
+                            <h1 className="cell-title">Nationality</h1>
+                            <h1 className="cell-data">{guessResult.nationality}</h1>
+                        </div>
+                        <div id="all-nba" className="result-item">
+                            <h1 className="cell-title">All NBA</h1>
+                            <h1 className="cell-data">{guessResult.allNbaSelections}</h1>
+                        </div>
+                        <div id="experience" className="result-item">
+                            <h1 className="cell-title">Experience</h1>
+                            <h1 className="cell-data">{guessResult.experience}</h1>
+                        </div>
+                    </div>
+                    <div id="colour-key">
+                        <p id="no-match" className="example">No Match</p>
+                        <p id="close" className="example">Close</p>
+                        <p id="match" className="example">Match</p>
+                    </div>
                 </div>
-                <div id="height" className="result-item">
-                    <h1 className="cell-title">Height</h1>
-                    <h1 className="cell-data">{result.height}</h1>
-                </div>
-                <div id="weight" className="result-item">
-                    <h1 className="cell-title">Weight</h1>
-                    <h1 className="cell-data">{result.weight}</h1>
-                </div>
-                <div id="nationality" className="result-item">
-                    <h1 className="cell-title">Nationality</h1>
-                    <h1 className="cell-data">{result.nationality}</h1>
-                </div>
-                <div id="all-nba" className="result-item">
-                    <h1 className="cell-title">All NBA</h1>
-                    <h1 className="cell-data">{result.allNbaSelections}</h1>
-                </div>
-                <div id="experience" className="result-item">
-                    <h1 className="cell-title">Experience</h1>
-                    <h1 className="cell-data">{result.experience}</h1>
-                </div>
-            </div>
-            <div id="colour-key">
-                <p id="no-match" className="example">No Match</p>
-                <p id="close" className="example">Close</p>
-                <p id="match" className="example">Match</p>
-            </div>
+            ))}
         </div>
     )
 
