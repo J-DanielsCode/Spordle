@@ -50,7 +50,7 @@ const ResultComponent = ({ guessNum, searchResults }) => {
 
     return (
         
-        <div className="result-container">
+        <div className="result-container z-40">
             <div id="player-profile">
                 <img id="player-pic" src={jokicPic} alt="Nikola Jokic" ></img>
                 <h1 id="player-name">{result.name}</h1>

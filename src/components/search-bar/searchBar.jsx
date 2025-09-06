@@ -95,8 +95,8 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
                 </div>{' '}
             </form>{' '}
             {searchSuggestions.length > 0 && (
-                <div className="w-full max-w-lg rounded-lg bg-white p-2 shadow-md mb-4">
-                    <h2 className="text-sm font-bold mb-2">Suggestions:</h2>
+                <div className="z-50 w-full max-w-lg rounded-lg bg-white p-2 shadow-md mb-4">
+                    {/* <h2 className="text-sm font-bold mb-2">Suggestions:</h2> */}
                     <ul>
                         {searchSuggestions.map((s) => (
                         <li key={s.height} className="text-gray-700">
