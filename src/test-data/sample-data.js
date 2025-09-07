@@ -49,7 +49,7 @@ export const sampleData = [
         draftYear: "2007",
         height: "2.11m",
         weight: "116kg",
-        nationality: "spain",
+        nationality: "Spain",
         allNbaSelections: "2",
         experience: "14",
     },
@@ -88,5 +88,14 @@ export const sampleData = [
         nationality: "United States",
         allNbaSelections: "3",
         experience: "12",
+    },
+    {
+        name: "Charles Barkley",
+        draftYear: "1984",
+        height: "1.98m",
+        weight: "114kg",
+        nationality: "United States",
+        allNbaSelections: "11",
+        experience: "16",
     },
 ];

@@ -43,6 +43,19 @@
             background-color: #4D5467;
             border-radius: 10px;
 
+            &.correct {
+                background-color: green;
+            }
+
+            &.close {
+                background-color: yellow;
+                color: black;
+            }
+
+            &.incorrect {
+                background-color: #4D5467; // fallback (or omit, since it's already default)
+            }
+
             .cell-title {
                 width: 100%;
                 // border: solid 1px green;

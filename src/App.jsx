@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SearchBar from './components/search-bar/searchBar'
 import NavBar from './components/nav-bar/navBar';
-import ResultComponent from './components/result/result';
+import ResultComponent from './components/result/resultsDisplay';
  
 function App() {
   const [guessNum, setGuessNum] = useState(1);
