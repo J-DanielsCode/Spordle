@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./result.scss";
 import { targetData } from "../../test-data/target-data.js";
-import { sampleData } from "../../test-data/sample-data.js";
 import { fetchGuessContinent } from "../../helpers/nationalityRequest.js";
 import { fetchTargetContinent } from "../../helpers/nationalityRequest.js";
 import jokicPic from "../../assets/images/jokic.jpeg";
@@ -128,37 +127,8 @@ const ResultRow = ({ guessResult, target }) => {
         guessResult.height,
         target.height
     );
-    const getNationalityStatus = async (guessNationality, targetNationality) => {
-        if (guessNationality === targetNationality) {
-            return "correct";
-        } else {
-            const guessContinent = await fetchGuessContinent(guessNationality);
-            const targetContinent = await fetchTargetContinent(targetNationality);
 
-            console.log("Guess continent: " + guessContinent);
-            console.log("Target continent: " + targetContinent);
-
-            if (guessContinent === targetContinent) {
-                return "close";
-            }
-            return "incorrect";
-        }
-    };
     const profileImage = imageSelector(guessResult.name);
-
-    // useEffect(() => {
-
-    //     const checkStatus = async () => {
-    //         const status = await getNationalityStatus(
-    //             guessResult.nationality,
-    //             target.nationality
-    //         );
-    //         setNationalityStatus(status);
-    //         setLoadingState(false);
-    //     };
-    //     checkStatus();
-        
-    // }, [guessResult.nationality, target.nationality]);
 
     useEffect(() => {
         let isMounted = true; // prevent setting state if unmounted

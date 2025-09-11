@@ -136,48 +136,6 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
                     </ul>
                 </div>
             )}
-            {/* {searchResults.length > 0 && (
-                <div className="w-full max-w-lg rounded-lg bg-white p-2 shadow-md">
-                    <h2 className="text-sm font-bold mb-2">Results:</h2>
-                    <ul>
-                        {searchResults.map((r) => (
-                            <li key={r.height} className="mb-2">
-                                <a
-                                    href={r.url}
-                                    className="text-blue-600 hover:underline"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                {r.name}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )} */}
-
-
-            {/* {searchResults.length > 0 && (
-                <div className="w-full max-w-lg rounded-lg bg-white p-2 shadow-md">
-                    {/* <h2 className="mb-4 text-xl font-bold"> Search Results: </h2>{' '} */}
-                    {/* <ul>
-                        {' '}
-                        {searchResults.map((result) => (
-                            <li key={result.height} className="mb-2">
-                                <a
-                                    href={result.url}
-                                    className="text-blue-600 hover:underline"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {' '}
-                                    {result.name}{' '}
-                                </a>{' '}
-                            </li>
-                        ))}{' '}
-                    </ul>{' '}
-                </div>
-            )}{' '} */} 
         </div>
     )
 }
