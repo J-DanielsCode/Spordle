@@ -21,7 +21,7 @@ import mjPic from "../../assets/images/Michael-Jordan.jpg";
 
 
 const ResultRow = ({ guessResult, target }) => {
-    const [nationalityStatus, setNationalityStatus] = useState("");
+    const [nationalityStatus, setNationalityStatus] = useState(null);
     const [loadingState, setLoadingState] = useState(true);
 
     const imageSelector = (name) => {
@@ -146,19 +146,39 @@ const ResultRow = ({ guessResult, target }) => {
     };
     const profileImage = imageSelector(guessResult.name);
 
-    useEffect(() => {
-        const checkStatus = async () => {
-            const status = await getNationalityStatus(
-                guessResult.nationality,
-                target.nationality
-            );
-            setNationalityStatus(status);
-            setLoadingState(false);
-        };
-        checkStatus();
-    }, [guessResult.nationality, target.nationality]);
+    // useEffect(() => {
 
-    if (loadingState) return null;
+    //     const checkStatus = async () => {
+    //         const status = await getNationalityStatus(
+    //             guessResult.nationality,
+    //             target.nationality
+    //         );
+    //         setNationalityStatus(status);
+    //         setLoadingState(false);
+    //     };
+    //     checkStatus();
+        
+    // }, [guessResult.nationality, target.nationality]);
+
+    useEffect(() => {
+        let isMounted = true; // prevent setting state if unmounted
+        const checkNationality = async () => {
+            if (guessResult.nationality === target.nationality) {
+                if (isMounted) setNationalityStatus("correct");
+            } else {
+                const guessContinent = await fetchGuessContinent(guessResult.nationality);
+                const targetContinent = await fetchTargetContinent(target.nationality);
+                if (isMounted) setNationalityStatus(
+                    guessContinent === targetContinent ? "close" : "incorrect"
+                );
+            }
+        };
+        checkNationality();
+        return () => { isMounted = false };
+    }, [guessResult.id]); // run only once per guess
+
+    //if (loadingState) return null;
+    if (nationalityStatus === null) return null;
 
     return (
         <div className="mb-6">
@@ -234,7 +254,7 @@ const ResultComponent = ({ searchResults }) => {
         <div className="result-container z-40">
             {searchResults.map((guessResult, index) => (
                 <ResultRow
-                    key={index}
+                    key={guessResult.id}
                     guessResult={guessResult}
                     target={targetData[0]}
                 />

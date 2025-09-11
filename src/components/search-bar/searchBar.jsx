@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import { Search, Mic } from 'lucide-react'
-import { sampleData } from "../../test-data/sample-data.js"
+import React, { useEffect, useState, useCallback } from 'react';
+import { Search, Mic } from 'lucide-react';
+import { sampleData } from "../../test-data/sample-data.js";
 
  
 const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
@@ -46,6 +46,11 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
         handleSuggestion(e.target.value);
     };
 
+    const makeGuess = (player) => ({
+        ...player,
+        id: `${player.name}-${guessNum}`
+    });
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -55,7 +60,9 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
             );
 
             if (results.length > 0) {
-                setSearchResults((prev) => [results[0], ...prev]);      // run search only when Enter pressed
+                const guess = makeGuess(results[0]);
+
+                setSearchResults((prev) => [guess, ...prev]);      // run search only when Enter pressed
                 setGuessNum((prev) => prev + 1); // increment guessNum only here
                 setSearchSuggestions([]);
                 setSearchTerm('');
@@ -65,6 +72,8 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
         }
         
     };
+
+    
 
     return (
         <div className="h-32 flex flex-col items-center bg-gray-950 p-4">
@@ -113,7 +122,8 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
                                 rel="noopener noreferrer"
                                 onClick={(e) => {
                                     e.preventDefault();          // prevent default link navigation
-                                    setSearchResults((prev) => [s, ...prev]);       // puts search result to beggining of arr
+                                    const guess = makeGuess(s);
+                                    setSearchResults((prev) => [guess, ...prev]);       // puts search result to beggining of arr
                                     setSearchTerm(s.name);       // optional: update input field
                                     setSearchSuggestions([]);    // hide suggestions
                                     setGuessNum((prev) => prev + 1); // increment guessNum
