@@ -20,11 +20,8 @@ import mjPic from "../../assets/images/Michael-Jordan.jpg";
 
 
 
-
-
-
-const ResultComponent = ({ guessNum, searchResults }) => {
-    if (!searchResults || searchResults.length === 0) return null; // no results yet
+const ResultRow = ({ guessResult, target }) => {
+    const [nationalityStatus, setNationalityStatus] = useState("");
 
     const imageSelector = (name) => {
         switch (name) {
@@ -116,122 +113,134 @@ const ResultComponent = ({ guessNum, searchResults }) => {
         return "incorrect";  
     };
 
+    const draftStatus = getDraftStatus(
+        guessResult.draftYear,
+        target.draftYear
+    );
+    const allNbaStatus = getAllNbaStatus(
+        guessResult.allNbaSelections,
+        target.allNbaSelections
+    );
+    const experienceStatus = getExperienceStatus(
+        guessResult.experience,
+        target.experience
+    );
+    const weightStatus = getWeightStatus(
+        guessResult.weight,
+        target.weight
+    );
+    const heightStatus = getHeightStatus(
+        guessResult.height,
+        target.height
+    );
     const getNationalityStatus = async (guessNationality, targetNationality) => {
         if (guessNationality === targetNationality) {
             return "correct";
         } else {
             const guessContinent = await fetchGuessContinent(guessNationality);
-            console.log("Guess continent: " + guessContinent);
             const targetContinent = await fetchTargetContinent(targetNationality);
+
+            console.log("Guess continent: " + guessContinent);
             console.log("Target continent: " + targetContinent);
+
             if (guessContinent === targetContinent) {
                 return "close";
             }
             return "incorrect";
         }
+    };
+    const profileImage = imageSelector(guessResult.name);
 
-    }
-
-    
-
-
-
+    useEffect(() => {
+        const checkStatus = async () => {
+            const status = await getNationalityStatus(
+                guessResult.nationality,
+                target.nationality
+            );
+            setNationalityStatus(status);
+        };
+        checkStatus();
+    }, [guessResult.nationality, target.nationality]);
 
     return (
-        
+        <div className="mb-6">
+            <div id="player-profile">
+                <img 
+                    id="player-pic" 
+                    src={profileImage} 
+                    alt={guessResult.name} 
+                />
+                <h1 id="player-name">{guessResult.name}</h1>
+            </div>
+            <div id="result-grid" >
+
+                
+                <div 
+                    id="draft" 
+                    className={`result-item ${draftStatus}`}
+                >
+                    <h1 className="cell-title">Draft</h1>
+                    <h1 className="cell-data">{guessResult.draftYear}</h1>
+                </div>
+                <div 
+                    id="height" 
+                    className={`result-item ${heightStatus}`}
+                >
+                    <h1 className="cell-title">Height</h1>
+                    <h1 className="cell-data">{guessResult.height}</h1>
+                </div>
+                <div 
+                    id="weight" 
+                    className={`result-item ${weightStatus}`}
+                >
+                    <h1 className="cell-title">Weight</h1>
+                    <h1 className="cell-data">{guessResult.weight}</h1>
+                </div>
+                <div 
+                    id="nationality" 
+                    className={`result-item ${nationalityStatus}`}
+                >
+                    <h1 className="cell-title">Nationality</h1>
+                    <h1 className="cell-data">{guessResult.nationality}</h1>
+                </div>
+                <div 
+                    id="all-nba" 
+                    className={`result-item ${allNbaStatus}`}
+                >
+                    <h1 className="cell-title">All NBA</h1>
+                    <h1 className="cell-data">{guessResult.allNbaSelections}</h1>
+                </div>
+                <div 
+                    id="experience" 
+                    className={`result-item ${experienceStatus}`}
+                >
+                    <h1 className="cell-title">Experience</h1>
+                    <h1 className="cell-data">{guessResult.experience}</h1>
+                </div>
+            </div>
+            <div id="colour-key">
+                <p id="no-match" className="example">No Match</p>
+                <p id="close" className="example">Close</p>
+                <p id="match" className="example">Match</p>
+            </div>
+        </div>
+    )
+}
+
+
+const ResultComponent = ({ guessNum, searchResults }) => {
+
+    if (!searchResults || searchResults.length === 0) return null; // no results yet
+
+    return (
         <div className="result-container z-40">
-            {searchResults.map((guessResult, index) => {
-                const draftStatus = getDraftStatus(
-                    guessResult.draftYear,
-                    targetData[0].draftYear
-                );
-                const allNbaStatus = getAllNbaStatus(
-                    guessResult.allNbaSelections,
-                    targetData[0].allNbaSelections
-                );
-                const experienceStatus = getExperienceStatus(
-                    guessResult.experience,
-                    targetData[0].experience
-                );
-                const weightStatus = getWeightStatus(
-                    guessResult.weight,
-                    targetData[0].weight
-                );
-                const heightStatus = getHeightStatus(
-                    guessResult.height,
-                    targetData[0].height
-                );
-                const nationalityStatus = getNationalityStatus(
-                    guessResult.nationality,
-                    targetData[0].nationality
-                );
-                const profileImage = imageSelector(guessResult.name);
-
-
-                return (
-                    <div key={index} className="mb-6">
-                        <div id="player-profile">
-                            <img 
-                                id="player-pic" 
-                                src={profileImage} 
-                                alt={guessResult.name} 
-                            />
-                            <h1 id="player-name">{guessResult.name}</h1>
-                        </div>
-                        <div id="result-grid" >
-
-                            
-                            <div 
-                                id="draft" 
-                                className={`result-item ${draftStatus}`}
-                            >
-                                <h1 className="cell-title">Draft</h1>
-                                <h1 className="cell-data">{guessResult.draftYear}</h1>
-                            </div>
-                            <div 
-                                id="height" 
-                                className={`result-item ${heightStatus}`}
-                            >
-                                <h1 className="cell-title">Height</h1>
-                                <h1 className="cell-data">{guessResult.height}</h1>
-                            </div>
-                            <div 
-                                id="weight" 
-                                className={`result-item ${weightStatus}`}
-                            >
-                                <h1 className="cell-title">Weight</h1>
-                                <h1 className="cell-data">{guessResult.weight}</h1>
-                            </div>
-                            <div 
-                                id="nationality" 
-                                className={`result-item ${nationalityStatus}`}
-                            >
-                                <h1 className="cell-title">Nationality</h1>
-                                <h1 className="cell-data">{guessResult.nationality}</h1>
-                            </div>
-                            <div 
-                                id="all-nba" 
-                                className={`result-item ${allNbaStatus}`}
-                            >
-                                <h1 className="cell-title">All NBA</h1>
-                                <h1 className="cell-data">{guessResult.allNbaSelections}</h1>
-                            </div>
-                            <div 
-                                id="experience" 
-                                className={`result-item ${experienceStatus}`}
-                            >
-                                <h1 className="cell-title">Experience</h1>
-                                <h1 className="cell-data">{guessResult.experience}</h1>
-                            </div>
-                        </div>
-                        <div id="colour-key">
-                            <p id="no-match" className="example">No Match</p>
-                            <p id="close" className="example">Close</p>
-                            <p id="match" className="example">Match</p>
-                        </div>
-                    </div>
-                )
-            })}
+            {searchResults.map((guessResult, index) => (
+                <ResultRow
+                    key={index}
+                    guessResult={guessResult}
+                    target={targetData[0]}
+                />
+            ))}
         </div>
     )
 
