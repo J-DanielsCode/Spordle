@@ -18,7 +18,6 @@ function App() {
       {/* Only show ResultComponent when guessNum === 2 */}
       {guessNum > 1 && 
         <ResultComponent 
-          guessNum={guessNum}
           searchResults={searchResults}
         />
       }

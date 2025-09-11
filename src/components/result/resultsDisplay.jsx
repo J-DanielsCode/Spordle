@@ -22,6 +22,7 @@ import mjPic from "../../assets/images/Michael-Jordan.jpg";
 
 const ResultRow = ({ guessResult, target }) => {
     const [nationalityStatus, setNationalityStatus] = useState("");
+    const [loadingState, setLoadingState] = useState(true);
 
     const imageSelector = (name) => {
         switch (name) {
@@ -54,12 +55,6 @@ const ResultRow = ({ guessResult, target }) => {
             
         }
     }
-
-    // const guessResult = () => {
-    //     const resultIndex = sampleData.findIndex(obj => obj.name.toLowerCase() === searchResults[0].toLowerCase());
-    //     return sampleData[resultIndex];
-    // }
-    // const result = searchResults[0]; // guessResult();
 
     const getDraftStatus = (guessYear, targetYear) => {
         const dGuess = parseInt(guessYear);
@@ -158,9 +153,12 @@ const ResultRow = ({ guessResult, target }) => {
                 target.nationality
             );
             setNationalityStatus(status);
+            setLoadingState(false);
         };
         checkStatus();
     }, [guessResult.nationality, target.nationality]);
+
+    if (loadingState) return null;
 
     return (
         <div className="mb-6">
@@ -228,7 +226,7 @@ const ResultRow = ({ guessResult, target }) => {
 }
 
 
-const ResultComponent = ({ guessNum, searchResults }) => {
+const ResultComponent = ({ searchResults }) => {
 
     if (!searchResults || searchResults.length === 0) return null; // no results yet
 
