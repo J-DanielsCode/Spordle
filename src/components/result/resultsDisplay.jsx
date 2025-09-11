@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./result.scss";
 import { targetData } from "../../test-data/target-data.js";
 import { sampleData } from "../../test-data/sample-data.js";
+import { fetchGuessContinent } from "../../helpers/nationalityRequest.js";
+import { fetchTargetContinent } from "../../helpers/nationalityRequest.js";
 import jokicPic from "../../assets/images/jokic.jpeg";
 import rosePic from "../../assets/images/Derrick_Rose_2.jpg";
 import lebronPic from "../../assets/images/lebron-james.jpg";
@@ -13,6 +15,7 @@ import belinelliPic from "../../assets/images/Marco_Belinelli_18_(cropped).jpg";
 import wembyPic from "../../assets/images/victor-wembanyama.jpg";
 import gilbertPic from "../../assets/images/Gilbert_arenas_2008.jpg";
 import barkleyPic from "../../assets/images/charles-barkley.jpg";
+import mjPic from "../../assets/images/Michael-Jordan.jpg";
 
 
 
@@ -47,6 +50,8 @@ const ResultComponent = ({ guessNum, searchResults }) => {
                 return belinelliPic;
             case "Charles Barkley":
                 return barkleyPic;
+            case "Michael Jordan":
+                return mjPic;
             default:
                 return jokicPic;
             
@@ -63,6 +68,8 @@ const ResultComponent = ({ guessNum, searchResults }) => {
         const dGuess = parseInt(guessYear);
         const dTarget = parseInt(targetYear);
         const diff = Math.abs(dGuess - dTarget);
+
+        
 
         if (diff === 0) return "correct";
         if (diff <= 5) return "close";
@@ -109,6 +116,22 @@ const ResultComponent = ({ guessNum, searchResults }) => {
         return "incorrect";  
     };
 
+    const getNationalityStatus = async (guessNationality, targetNationality) => {
+        if (guessNationality === targetNationality) {
+            return "correct";
+        } else {
+            const guessContinent = await fetchGuessContinent(guessNationality);
+            console.log("Guess continent: " + guessContinent);
+            const targetContinent = await fetchTargetContinent(targetNationality);
+            console.log("Target continent: " + targetContinent);
+            if (guessContinent === targetContinent) {
+                return "close";
+            }
+            return "incorrect";
+        }
+
+    }
+
     
 
 
@@ -126,7 +149,7 @@ const ResultComponent = ({ guessNum, searchResults }) => {
                     guessResult.allNbaSelections,
                     targetData[0].allNbaSelections
                 );
-                const experienceStatus = getAllNbaStatus(
+                const experienceStatus = getExperienceStatus(
                     guessResult.experience,
                     targetData[0].experience
                 );
@@ -137,6 +160,10 @@ const ResultComponent = ({ guessNum, searchResults }) => {
                 const heightStatus = getHeightStatus(
                     guessResult.height,
                     targetData[0].height
+                );
+                const nationalityStatus = getNationalityStatus(
+                    guessResult.nationality,
+                    targetData[0].nationality
                 );
                 const profileImage = imageSelector(guessResult.name);
 
@@ -175,7 +202,10 @@ const ResultComponent = ({ guessNum, searchResults }) => {
                                 <h1 className="cell-title">Weight</h1>
                                 <h1 className="cell-data">{guessResult.weight}</h1>
                             </div>
-                            <div id="nationality" className="result-item">
+                            <div 
+                                id="nationality" 
+                                className={`result-item ${nationalityStatus}`}
+                            >
                                 <h1 className="cell-title">Nationality</h1>
                                 <h1 className="cell-data">{guessResult.nationality}</h1>
                             </div>
