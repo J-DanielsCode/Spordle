@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import SearchBar from './components/search-bar/searchBar'
 import NavBar from './components/nav-bar/navBar';
 import ResultComponent from './components/result/resultsDisplay';
+import CorrectDisplay from './components/correct/correctDisplay';
  
 function App() {
   const [guessNum, setGuessNum] = useState(1);
   const [searchResults, setSearchResults] = useState([]);
+  const [correctAnswer, setCorrectAnswer] = useState(true);
   
   return (
     <div className="App">
@@ -19,8 +21,12 @@ function App() {
       {guessNum > 1 && 
         <ResultComponent 
           searchResults={searchResults}
+          correctAnswer={correctAnswer}
         />
       }
+      <CorrectDisplay
+        correctAnswer={correctAnswer}
+      />
     </div>
   );
 }

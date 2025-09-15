@@ -1,6 +1,7 @@
 export const sampleData = [
     {
         name: "Nikola Jokic",
+        id: "12",
         draftYear: "2014",
         height: "2.11m",
         weight: "129kg",
@@ -10,6 +11,7 @@ export const sampleData = [
     },
     {
         name: "LeBron James",
+        id: "11",
         draftYear: "2003",
         height: "2.06m",
         weight: "113kg",
@@ -19,6 +21,7 @@ export const sampleData = [
     },
     {
         name: "Derrick Rose",
+        id: "10",
         draftYear: "2008",
         height: "1.91m",
         weight: "91kg",
@@ -28,6 +31,7 @@ export const sampleData = [
     },
     {
         name: "Chris Webber",
+        id: "9",
         draftYear: "1993",
         height: "2.08m",
         weight: "111kg",
@@ -37,6 +41,7 @@ export const sampleData = [
     },
     {
         name: "George Gervin",
+        id: "8",
         draftYear: "1974",
         height: "2.01m",
         weight: "82kg",
@@ -46,6 +51,7 @@ export const sampleData = [
     },
     {
         name: "Marc Gasol",
+        id: "7",
         draftYear: "2007",
         height: "2.11m",
         weight: "116kg",
@@ -55,6 +61,7 @@ export const sampleData = [
     },
     {
         name: "Victor Wembanyama",
+        id: "6",
         draftYear: "2023",
         height: "2.21m",
         weight: "107kg",
@@ -64,6 +71,7 @@ export const sampleData = [
     },
     {
         name: "Manu Ginobili",
+        id: "5",
         draftYear: "1999",
         height: "1.98m",
         weight: "93kg",
@@ -73,6 +81,7 @@ export const sampleData = [
     },
     {
         name: "Marco Belinelli",
+        id: "4",
         draftYear: "2007",
         height: "1.96m",
         weight: "100kg",
@@ -82,6 +91,7 @@ export const sampleData = [
     },
     {
         name: "Gilbert Arenas",
+        id: "3",
         draftYear: "2001",
         height: "1.93m",
         weight: "98kg",
@@ -91,6 +101,7 @@ export const sampleData = [
     },
     {
         name: "Charles Barkley",
+        id: "2",
         draftYear: "1984",
         height: "1.98m",
         weight: "114kg",
@@ -100,6 +111,7 @@ export const sampleData = [
     },
     {
         name: "Michael Jordan",
+        id: "1",
         draftYear: "1984",
         height: "1.98m",
         weight: "98kg",

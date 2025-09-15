@@ -31,25 +31,11 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
         }, 300),
         [],
     )
-
-
-
-
-
-    
-    // useEffect(() => {
-    //     handleSearch(searchTerm);
-    // }, [searchTerm, handleSearch]);
     
     const handleInputChange = (e) => {
         setSearchTerm(e.target.value);
         handleSuggestion(e.target.value);
     };
-
-    const makeGuess = (player) => ({
-        ...player,
-        id: `${player.name}-${guessNum}`
-    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -60,9 +46,8 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
             );
 
             if (results.length > 0) {
-                const guess = makeGuess(results[0]);
 
-                setSearchResults((prev) => [guess, ...prev]);      // run search only when Enter pressed
+                setSearchResults((prev) => [results[0], ...prev]);      // run search only when Enter pressed
                 setGuessNum((prev) => prev + 1); // increment guessNum only here
                 setSearchSuggestions([]);
                 setSearchTerm('');
@@ -109,11 +94,11 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
                 </div>{' '}
             </form>{' '}
             {searchSuggestions.length > 0 && (
-                <div className="z-50 w-full max-w-lg rounded-lg bg-white p-2 shadow-md mb-4">
+                <div className="z-40 w-full max-w-lg rounded-lg bg-white p-2 shadow-md mb-4">
                     {/* <h2 className="text-sm font-bold mb-2">Suggestions:</h2> */}
                     <ul>
                         {searchSuggestions.map((s) => (
-                        <li key={s.height} className="text-gray-700">
+                        <li key={s.id} className="text-gray-700">
                             {/* {s.name} */}
                             <a
                                 href={s.url}
@@ -122,8 +107,7 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
                                 rel="noopener noreferrer"
                                 onClick={(e) => {
                                     e.preventDefault();          // prevent default link navigation
-                                    const guess = makeGuess(s);
-                                    setSearchResults((prev) => [guess, ...prev]);       // puts search result to beggining of arr
+                                    setSearchResults((prev) => [s, ...prev]);       // puts search result to beggining of arr
                                     setSearchTerm(s.name);       // optional: update input field
                                     setSearchSuggestions([]);    // hide suggestions
                                     setGuessNum((prev) => prev + 1); // increment guessNum

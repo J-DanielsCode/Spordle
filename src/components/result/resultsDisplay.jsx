@@ -221,7 +221,7 @@ const ResultComponent = ({ searchResults }) => {
     if (!searchResults || searchResults.length === 0) return null; // no results yet
 
     return (
-        <div className="result-container z-40">
+        <div className="result-container z-30">
             {searchResults.map((guessResult, index) => (
                 <ResultRow
                     key={guessResult.id}

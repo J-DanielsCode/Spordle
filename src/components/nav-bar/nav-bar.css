@@ -1,0 +1,32 @@
+header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: black;
+  border-bottom: solid 1px #7b7878;
+  box-sizing: border-box;
+}
+header #header-bar {
+  background-color: black;
+  height: 40px;
+  width: 100%;
+  max-width: 512px;
+  margin: 0;
+  padding: 0;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+header #header-bar .header-bar-left {
+  display: flex;
+  flex-direction: row;
+}
+header #header-bar .header-bar-right {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+}
+header #header-bar .header-bar-right #stats {
+  margin: 0 10px;
+}/*# sourceMappingURL=nav-bar.css.map */
