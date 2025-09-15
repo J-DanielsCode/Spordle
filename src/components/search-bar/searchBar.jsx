@@ -3,7 +3,7 @@ import { Search, Mic } from 'lucide-react';
 import { sampleData } from "../../test-data/sample-data.js";
 
  
-const SearchBar = ({ guessNum, setGuessNum, setSearchResults }) => {
+const SearchBar = ({ guessNum, setGuessNum, setSearchResults, }) => {
     // Todo for you: Add the below code to the GoogleSearchBar component:
     const [searchTerm, setSearchTerm] = useState('');
     // const [searchResults, setSearchResults] = useState([]);

@@ -16,11 +16,13 @@ function App() {
         guessNum={guessNum} 
         setGuessNum={setGuessNum}
         setSearchResults={setSearchResults}
+        correctAnswer={correctAnswer}
       />
       {/* Only show ResultComponent when guessNum === 2 */}
       {guessNum > 1 && 
         <ResultComponent 
           searchResults={searchResults}
+          setCorrectAnswer={setCorrectAnswer}
           correctAnswer={correctAnswer}
         />
       }
