@@ -19,7 +19,7 @@ import mjPic from "../../assets/images/Michael-Jordan.jpg";
 
 
 
-const ResultRow = ({ guessResult, target }) => {
+const ResultRow = ({ guessResult, target, setCorrectAnswer, correctAnswer }) => {
     const [nationalityStatus, setNationalityStatus] = useState(null);
     const [loadingState, setLoadingState] = useState(true);
 
@@ -54,6 +54,10 @@ const ResultRow = ({ guessResult, target }) => {
             
         }
     }
+    // useEffect(() => {
+    //     setCorrectAnswer(guessResult.id === target.id);
+    // }, [guessResult.id, target.id, setCorrectAnswer]);
+    
 
     const getDraftStatus = (guessYear, targetYear) => {
         const dGuess = parseInt(guessYear);
@@ -216,9 +220,17 @@ const ResultRow = ({ guessResult, target }) => {
 }
 
 
-const ResultComponent = ({ searchResults }) => {
+const ResultComponent = ({ searchResults, setCorrectAnswer, correctAnswer }) => {
 
     if (!searchResults || searchResults.length === 0) return null; // no results yet
+
+    const target = targetData[0];
+    const correct = searchResults.some(r => r.id === target.id);
+    console.log("correctAnswer = " + correct);
+
+    React.useEffect(() => {
+        setCorrectAnswer(correct);
+    }, [correct, setCorrectAnswer]);
 
     return (
         <div className="result-container z-30">
@@ -227,6 +239,8 @@ const ResultComponent = ({ searchResults }) => {
                     key={guessResult.id}
                     guessResult={guessResult}
                     target={targetData[0]}
+                    // setCorrectAnswer={setCorrectAnswer}
+                    correctAnswer={correct}
                 />
             ))}
         </div>

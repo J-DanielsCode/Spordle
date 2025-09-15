@@ -7,7 +7,7 @@ import CorrectDisplay from './components/correct/correctDisplay';
 function App() {
   const [guessNum, setGuessNum] = useState(1);
   const [searchResults, setSearchResults] = useState([]);
-  const [correctAnswer, setCorrectAnswer] = useState(true);
+  const [correctAnswer, setCorrectAnswer] = useState(false);
   
   return (
     <div className="App">
