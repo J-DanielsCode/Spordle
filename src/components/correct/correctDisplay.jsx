@@ -5,7 +5,7 @@ import belinelliPic from "../../assets/images/Marco_Belinelli_18_(cropped).jpg";
 
 
 
-const CorrectDisplay = ({ correctAnswer }) =>{
+const CorrectDisplay = ({ setCorrectAnsDisplay, correctAnsDisplay }) =>{
 
     const imageSelector = (name) => {
         switch (name) {
@@ -18,25 +18,37 @@ const CorrectDisplay = ({ correctAnswer }) =>{
             
         }
     }  
+    const handleCloseClick = () => {
+        setCorrectAnsDisplay(false);
+        console.log("Correct Ans Display: " + correctAnsDisplay)
+    };
 
     const profilePic = imageSelector(targetData[0].name);
 
     return (
-        <>
-            {correctAnswer && (
-                <div id="correct-answer-card" className="z-50">
-                    <button>X</button>
-                    <h2 id="todays-player-is">Today's player is...</h2>
-                    <img 
-                        id="correct-answer-pic"
-                        alt={targetData[0].name}
-                        src={profilePic} 
-                    />
-                    <h1>{targetData[0].name}</h1>
-
+        <div id="card-container" className="p-4">
+            <div id="correct-answer-card" className="z-50 m-4">
+                <div className="close-container">
+                    <button
+                        type="button"
+                        id="close-button"
+                        onClick={handleCloseClick}
+                    >X</button>
                 </div>
-            )}
-        </>
+                <h2 id="todays-player-is">Today's player is...</h2>
+                <img 
+                    id="correct-answer-pic"
+                    alt={targetData[0].name}
+                    src={profilePic} 
+                />
+                <h1 id="player-name">{targetData[0].name}</h1>
+                <div id="links-container">
+                    <a id="share" className="links">Share Results</a>
+                    <a id="checkout" className="links">Checkout {targetData[0].name}</a>
+                    <a id="play" className="links">Play our other quizes here</a>
+                </div>
+            </div>
+        </div>
     )
 };
 

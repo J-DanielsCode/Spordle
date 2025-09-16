@@ -19,7 +19,7 @@ import mjPic from "../../assets/images/Michael-Jordan.jpg";
 
 
 
-const ResultRow = ({ guessResult, target }) => {
+const ResultRow = ({ guessResult, target, setCorrectAnswer, correctAnswer }) => {
     const [nationalityStatus, setNationalityStatus] = useState(null);
     const [loadingState, setLoadingState] = useState(true);
 
@@ -54,6 +54,10 @@ const ResultRow = ({ guessResult, target }) => {
             
         }
     }
+    // useEffect(() => {
+    //     setCorrectAnswer(guessResult.id === target.id);
+    // }, [guessResult.id, target.id, setCorrectAnswer]);
+    
 
     const getDraftStatus = (guessYear, targetYear) => {
         const dGuess = parseInt(guessYear);
@@ -222,11 +226,12 @@ const ResultComponent = ({ searchResults }) => {
 
     return (
         <div className="result-container z-30">
-            {searchResults.map((guessResult, index) => (
+            {searchResults.map((guessResult) => (
                 <ResultRow
                     key={guessResult.id}
                     guessResult={guessResult}
                     target={targetData[0]}
+
                 />
             ))}
         </div>
