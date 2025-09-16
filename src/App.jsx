@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SearchBar from './components/search-bar/searchBar'
 import NavBar from './components/nav-bar/navBar';
 import ResultComponent from './components/result/resultsDisplay';
 import CorrectDisplay from './components/correct/correctDisplay';
+import { targetData } from "./test-data/target-data.js";
+
  
 function App() {
   const [guessNum, setGuessNum] = useState(1);
   const [searchResults, setSearchResults] = useState([]);
   const [correctAnswer, setCorrectAnswer] = useState(false);
+
+  // Game logic: check correctness whenever searchResults changes
+  useEffect(() => {
+    const target = targetData[0];
+    const correct = searchResults.some(r => r.id === target.id);
+    setCorrectAnswer(correct);
+  }, [searchResults]);
   
   return (
     <div className="App">
@@ -26,9 +35,8 @@ function App() {
           correctAnswer={correctAnswer}
         />
       }
-      <CorrectDisplay
-        correctAnswer={correctAnswer}
-      />
+      {/* Show modal only when correct */}
+      {correctAnswer && <CorrectDisplay />}
     </div>
   );
 }

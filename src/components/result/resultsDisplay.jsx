@@ -220,27 +220,18 @@ const ResultRow = ({ guessResult, target, setCorrectAnswer, correctAnswer }) => 
 }
 
 
-const ResultComponent = ({ searchResults, setCorrectAnswer, correctAnswer }) => {
+const ResultComponent = ({ searchResults }) => {
 
     if (!searchResults || searchResults.length === 0) return null; // no results yet
 
-    const target = targetData[0];
-    const correct = searchResults.some(r => r.id === target.id);
-    console.log("correctAnswer = " + correct);
-
-    React.useEffect(() => {
-        setCorrectAnswer(correct);
-    }, [correct, setCorrectAnswer]);
-
     return (
         <div className="result-container z-30">
-            {searchResults.map((guessResult, index) => (
+            {searchResults.map((guessResult) => (
                 <ResultRow
                     key={guessResult.id}
                     guessResult={guessResult}
                     target={targetData[0]}
-                    // setCorrectAnswer={setCorrectAnswer}
-                    correctAnswer={correct}
+
                 />
             ))}
         </div>
