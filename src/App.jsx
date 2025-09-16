@@ -10,6 +10,7 @@ function App() {
   const [guessNum, setGuessNum] = useState(1);
   const [searchResults, setSearchResults] = useState([]);
   const [correctAnswer, setCorrectAnswer] = useState(false);
+  const [correctAnsDisplay, setCorrectAnsDisplay] = useState(false);
 
   // Game logic: check correctness whenever searchResults changes
   useEffect(() => {
@@ -17,10 +18,15 @@ function App() {
     const correct = searchResults.some(r => r.id === target.id);
     const timer = setTimeout(() => {
       setCorrectAnswer(correct);
+      if (correct) {
+        setCorrectAnsDisplay(true);
+      }
     }, 1500); //ms
-    
+
     return () => clearTimeout(timer); // cleanup if component unmounts
   }, [searchResults]);
+
+
   
   return (
     <div className="App">
@@ -40,7 +46,12 @@ function App() {
         />
       }
       {/* Show modal only when correct */}
-      {correctAnswer && <CorrectDisplay />}
+      {correctAnsDisplay && 
+        <CorrectDisplay 
+          setCorrectAnsDisplay={setCorrectAnsDisplay}
+          correctAnsDisplay={correctAnsDisplay}
+        />
+      }
     </div>
   );
 }

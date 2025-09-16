@@ -5,7 +5,7 @@ import belinelliPic from "../../assets/images/Marco_Belinelli_18_(cropped).jpg";
 
 
 
-const CorrectDisplay = () =>{
+const CorrectDisplay = ({ setCorrectAnsDisplay, correctAnsDisplay }) =>{
 
     const imageSelector = (name) => {
         switch (name) {
@@ -18,6 +18,10 @@ const CorrectDisplay = () =>{
             
         }
     }  
+    const handleCloseClick = () => {
+        setCorrectAnsDisplay(false);
+        console.log("Correct Ans Display: " + correctAnsDisplay)
+    };
 
     const profilePic = imageSelector(targetData[0].name);
 
@@ -25,7 +29,11 @@ const CorrectDisplay = () =>{
         <div id="card-container" className="p-4">
             <div id="correct-answer-card" className="z-50 m-4">
                 <div className="close-container">
-                    <button>X</button>
+                    <button
+                        type="button"
+                        id="close-button"
+                        onClick={handleCloseClick}
+                    >X</button>
                 </div>
                 <h2 id="todays-player-is">Today's player is...</h2>
                 <img 
