@@ -15,7 +15,11 @@ function App() {
   useEffect(() => {
     const target = targetData[0];
     const correct = searchResults.some(r => r.id === target.id);
-    setCorrectAnswer(correct);
+    const timer = setTimeout(() => {
+      setCorrectAnswer(correct);
+    }, 1500); //ms
+    
+    return () => clearTimeout(timer); // cleanup if component unmounts
   }, [searchResults]);
   
   return (
