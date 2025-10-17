@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Search, Mic } from 'lucide-react';
 import { sampleData } from "../../test-data/sample-data.js";
+import "./search-bar.scss";
 
  
 const SearchBar = ({ guessNum, setGuessNum, setSearchResults, }) => {
@@ -61,7 +62,7 @@ const SearchBar = ({ guessNum, setGuessNum, setSearchResults, }) => {
     
 
     return (
-        <div className="h-32 flex flex-col items-center bg-gray-950 p-4">
+        <div className="search-bar-module h-32 flex flex-col items-center p-4">
             <h1 className="text-white w-full px-5 mb-1 max-w-lg" >Guess {guessNum} of 10</h1>
             <form
                 onSubmit={handleSubmit}
