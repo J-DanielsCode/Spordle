@@ -13,4 +13,14 @@ describe("poundToKilos", () => {
         expect(actualRes).toBe(expectedRes);
         //teardown
     })
+    test("rounds up correctly for non-exact numbers", () => {
+        //setup
+        const expectedRes = 2;
+        
+        //exercise
+        const actualRes = poundToKilos("3");
+
+        //verify
+        expect(actualRes).toBe(expectedRes);   
+    })
 })
