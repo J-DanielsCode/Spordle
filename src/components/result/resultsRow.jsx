@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./result.scss";
-import { fetchGuessContinent } from "../../helpers/nationalityRequest.js";
-import { fetchTargetContinent } from "../../helpers/nationalityRequest.js";
+import { fetchGuessContinent } from "../../utils/nationalityRequest.js";
+import { fetchTargetContinent } from "../../utils/nationalityRequest.js";
 import jokicPic from "../../assets/images/jokic.jpeg";
 import rosePic from "../../assets/images/Derrick_Rose_2.jpg";
 import lebronPic from "../../assets/images/lebron-james.jpg";
